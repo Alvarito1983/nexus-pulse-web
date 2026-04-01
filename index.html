@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS Pulse — Uptime & Health Monitoring. Always on.</title>
+  <meta name="description" content="Monitor Docker containers, web services, TCP ports, DNS, databases and APIs in real-time. Self-hosted. No cloud. No limits." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════ NAV ══════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <svg width="26" height="26" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+          <rect x="28" y="28" width="62" height="62" rx="10" fill="#3b82f6"/>
+          <rect x="110" y="28" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.55"/>
+          <rect x="28" y="110" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.3"/>
+          <rect x="110" y="110" width="62" height="62" rx="10" fill="none" stroke="#3b82f6" stroke-width="6"/>
+          <text x="119" y="154" font-family="Arial, sans-serif" font-weight="900" font-size="52" fill="#3b82f6">P</text>
+        </svg>
+        <span class="nav-brand">NEXUS Pulse</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+        <a href="https://hub.docker.com/r/afraguas1983/nexus-pulse" target="_blank" rel="noopener" class="nav-link">Docker Hub</a>
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="nav-cta">Get started →</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://hub.docker.com/r/afraguas1983/nexus-pulse" target="_blank" rel="noopener">Docker Hub</a>
+      <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="mobile-cta">Get started →</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="container hero-container">
+
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Open source · MIT License · NEXUS Ecosystem
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-line line-1">Uptime monitoring.</span>
+        <span class="hero-line line-2">Always on<span class="accent-dot">.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Monitor Docker containers, web services, TCP ports,<br class="br-desktop"/>
+        DNS, databases and APIs in real-time.<br/>
+        Self-hosted. No cloud. No limits.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="btn-primary">→ Get started free</a>
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="btn-secondary">View on GitHub ↗</a>
+      </div>
+
+      <div class="hero-stats">
+        <span class="stat-item">6 monitor types</span>
+        <span class="stat-sep">·</span>
+        <span class="stat-item">30-check history</span>
+        <span class="stat-sep">·</span>
+        <span class="stat-item">Telegram alerts</span>
+      </div>
+
+    </div>
+
+    <!-- Screenshot mockup -->
+    <div class="container hero-screen-container">
+      <div class="screen-mockup">
+        <div class="screen-bar">
+          <div class="screen-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green-chrome"></span>
+          </div>
+          <span class="screen-url">localhost:9092 — NEXUS Pulse</span>
+        </div>
+        <div class="screen-placeholder">
+          <div class="placeholder-ui">
+            <div class="placeholder-sidebar">
+              <div class="ps-logo">
+                <svg width="20" height="20" viewBox="0 0 200 200" fill="none">
+                  <rect x="28" y="28" width="62" height="62" rx="10" fill="#3b82f6"/>
+                  <rect x="110" y="28" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.55"/>
+                  <rect x="28" y="110" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.3"/>
+                  <rect x="110" y="110" width="62" height="62" rx="10" fill="none" stroke="#3b82f6" stroke-width="6"/>
+                  <text x="119" y="154" font-family="Arial" font-weight="900" font-size="52" fill="#3b82f6">P</text>
+                </svg>
+                <span>Pulse</span>
+              </div>
+              <div class="ps-nav-item ps-active">Dashboard</div>
+              <div class="ps-nav-item">Monitors</div>
+              <div class="ps-nav-item">Alerts</div>
+              <div class="ps-nav-item">Settings</div>
+            </div>
+            <div class="placeholder-main">
+              <div class="placeholder-header">
+                <span class="ph-title">All Monitors</span>
+                <div class="ph-status-row">
+                  <span class="ph-badge ph-up">12 Up</span>
+                  <span class="ph-badge ph-down">1 Down</span>
+                  <span class="ph-badge ph-paused">2 Paused</span>
+                </div>
+              </div>
+              <div class="placeholder-monitors">
+                <div class="pm-row pm-row-up">
+                  <span class="pm-dot pm-dot-up"></span>
+                  <span class="pm-name">nginx-proxy</span>
+                  <span class="pm-type">Docker</span>
+                  <div class="pm-bars">
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                  </div>
+                  <span class="pm-latency">12ms</span>
+                </div>
+                <div class="pm-row pm-row-up">
+                  <span class="pm-dot pm-dot-up"></span>
+                  <span class="pm-name">api.example.com</span>
+                  <span class="pm-type">HTTPS</span>
+                  <div class="pm-bars">
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-down"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                  </div>
+                  <span class="pm-latency">84ms</span>
+                </div>
+                <div class="pm-row pm-row-down">
+                  <span class="pm-dot pm-dot-down"></span>
+                  <span class="pm-name">redis:6379</span>
+                  <span class="pm-type">TCP</span>
+                  <div class="pm-bars">
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-down"></span>
+                    <span class="pm-bar pb-down"></span><span class="pm-bar pb-down"></span><span class="pm-bar pb-down"></span>
+                  </div>
+                  <span class="pm-latency">—</span>
+                </div>
+                <div class="pm-row pm-row-up">
+                  <span class="pm-dot pm-dot-up"></span>
+                  <span class="pm-name">example.com DNS</span>
+                  <span class="pm-type">DNS</span>
+                  <div class="pm-bars">
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                  </div>
+                  <span class="pm-latency">5ms</span>
+                </div>
+                <div class="pm-row pm-row-up">
+                  <span class="pm-dot pm-dot-up"></span>
+                  <span class="pm-name">postgres:5432</span>
+                  <span class="pm-type">DB</span>
+                  <div class="pm-bars">
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                    <span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span><span class="pm-bar pb-up"></span>
+                  </div>
+                  <span class="pm-latency">3ms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TRUST BAR ════════════════════════════════ -->
+  <div class="trust-bar">
+    <div class="trust-track">
+      <div class="trust-inner">
+        <span>Self-hosted</span>
+        <span class="trust-sep">·</span>
+        <span>No telemetry</span>
+        <span class="trust-sep">·</span>
+        <span>Real-time</span>
+        <span class="trust-sep">·</span>
+        <span>Docker native</span>
+        <span class="trust-sep">·</span>
+        <span>Telegram alerts</span>
+        <span class="trust-sep">·</span>
+        <span>SSL monitoring</span>
+        <span class="trust-sep">·</span>
+        <span>MIT License</span>
+        <span class="trust-sep">·</span>
+        <span>Self-hosted</span>
+        <span class="trust-sep">·</span>
+        <span>No telemetry</span>
+        <span class="trust-sep">·</span>
+        <span>Real-time</span>
+        <span class="trust-sep">·</span>
+        <span>Docker native</span>
+        <span class="trust-sep">·</span>
+        <span>Telegram alerts</span>
+        <span class="trust-sep">·</span>
+        <span>SSL monitoring</span>
+        <span class="trust-sep">·</span>
+        <span>MIT License</span>
+        <span class="trust-sep">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ WHY PULSE ═════════════════════════════════ -->
+  <section class="why-section">
+    <div class="container">
+      <div class="why-grid">
+
+        <div class="why-col reveal">
+          <p class="section-label">The problem</p>
+          <h2>UptimeRobot is cloud.<br/><span class="text-blue">Pulse is yours.</span></h2>
+          <p class="why-desc">UptimeRobot is convenient — but your monitor data lives on someone else's server. Pulse gives you full visibility into your infrastructure with zero cloud dependency and zero monthly fees.</p>
+          <ul class="problem-list">
+            <li>Cloud dependency — your data, their servers</li>
+            <li>Privacy concerns with external pinging</li>
+            <li>Limited Docker container integration</li>
+            <li>Paid plans for more monitors or history</li>
+          </ul>
+        </div>
+
+        <div class="why-divider"></div>
+
+        <div class="why-col reveal" style="--delay:120ms">
+          <p class="section-label">The solution</p>
+          <ul class="solution-list">
+            <li><span class="check">✓</span> Fully self-hosted — your server, your data</li>
+            <li><span class="check">✓</span> Unlimited monitors, zero fees</li>
+            <li><span class="check">✓</span> Native Docker container monitoring</li>
+            <li><span class="check">✓</span> 30-check visual history per monitor</li>
+            <li><span class="check">✓</span> Telegram alerts included</li>
+            <li><span class="check">✓</span> SSL certificate expiry monitoring</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════== FEATURES ═════════════════════════════════  -->
+  <section class="features-section">
+    <div class="container">
+      <p class="section-label text-center reveal">Features</p>
+      <h2 class="section-title text-center reveal">Everything you need to monitor.<br/><span class="text-secondary">Nothing you don't.</span></h2>
+
+      <div class="features-grid">
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <h3>Docker monitoring</h3>
+          <p>Containers grouped by status: Running, Stopped, Other. Know the health of your entire stack at a glance.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Web monitors</h3>
+          <p>HTTP/HTTPS endpoint checking with SSL certificate expiry tracking. Never get caught off-guard by a cert expiry.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>TCP monitors</h3>
+          <p>Port availability checking for any TCP service. Perfect for databases, message queues, and custom services.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>DNS monitors</h3>
+          <p>Domain resolution monitoring to catch DNS failures before your users do. Supports A, AAAA, CNAME records.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Database monitors</h3>
+          <p>Connection health checks for PostgreSQL, MySQL, Redis and more. Catch DB outages before your app does.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>API monitors</h3>
+          <p>Endpoint response validation with status code and response body checks. Ensure your APIs behave correctly.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>30-check history bar</h3>
+          <p>Visual uptime bars showing the last 30 checks per monitor. Spot flapping services and intermittent issues instantly.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>Telegram alerts</h3>
+          <p>Instant notifications on state changes. Get alerted the moment a monitor goes down — or comes back up.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Multi-user</h3>
+          <p>Admin and Viewer roles with JWT authentication. Share read-only access with your team without security risk.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3>PWA + Mobile</h3>
+          <p>Installable as a desktop or mobile app. Fully responsive — check your uptime dashboard from anywhere.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3>Response time tracking</h3>
+          <p>Latency per monitor across every check. Detect performance degradation before it becomes an outage.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Dark Premium UI</h3>
+          <p>Linear / Vercel aesthetic. A monitoring dashboard you'll actually want to have open on your second screen.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ QUICKSTART ════════════════════════════════ -->
+  <section class="install-section">
+    <div class="container">
+      <p class="section-label text-center reveal">Quickstart</p>
+      <h2 class="section-title text-center reveal">Up and monitoring in minutes</h2>
+
+      <div class="terminal-wrap reveal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green-chrome"></span>
+          </div>
+          <span class="terminal-title">bash — nexus-pulse-install</span>
+          <button class="copy-all-btn" id="copyAllBtn" title="Copy all commands">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> curl -O https://raw.githubusercontent.com/Alvarito1983/nexus-pulse/main/docker-compose.yml</span></div>
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> cp .env.example .env</span></div>
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> docker compose up -d</span></div>
+          <div class="t-spacer"></div>
+          <div class="t-line t-out"><span class="t-check">✔</span> Container nexus-pulse-proxy &nbsp;Started</div>
+          <div class="t-line t-out"><span class="t-check">✔</span> Container nexus-pulse &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Started</div>
+          <div class="t-spacer"></div>
+          <div class="t-line t-out"><span class="t-arrow">→</span> Open <a class="t-link" href="#" onclick="return false">http://localhost:9092</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════= ECOSYSTEM ══════════════════════════════════ -->
+  <section class="ecosystem-section">
+    <div class="container">
+      <p class="section-label text-center reveal">NEXUS Ecosystem</p>
+      <h2 class="section-title text-center reveal">Part of a bigger picture</h2>
+      <p class="section-sub text-center reveal">Each tool works. Together, they think.</p>
+
+      <div class="ecosystem-list reveal">
+
+        <a class="eco-card eco-live" href="https://github.com/Alvarito1983/NEXUS" target="_blank" rel="noopener">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#00c896"></span>
+            <div>
+              <span class="eco-name">NEXUS</span>
+              <span class="eco-desc">Docker management panel</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9090</span>
+            <span class="eco-badge badge-live" style="--badge-color:#00c896; --badge-bg:rgba(0,200,150,0.08); --badge-border:rgba(0,200,150,0.18)">Live</span>
+          </div>
+        </a>
+
+        <a class="eco-card eco-live" href="https://alvarito1983.github.io/nexus-watcher-web" target="_blank" rel="noopener">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#F0A500"></span>
+            <div>
+              <span class="eco-name">Watcher</span>
+              <span class="eco-desc">Image update detection</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9091</span>
+            <span class="eco-badge badge-live" style="--badge-color:#F0A500; --badge-bg:rgba(240,165,0,0.08); --badge-border:rgba(240,165,0,0.18)">Live</span>
+          </div>
+        </a>
+
+        <a class="eco-card eco-live eco-active" href="#" onclick="return false">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#3b82f6"></span>
+            <div>
+              <span class="eco-name">Pulse</span>
+              <span class="eco-desc">Uptime &amp; health monitoring</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9092</span>
+            <span class="eco-badge badge-active">You are here</span>
+          </div>
+        </a>
+
+        <div class="eco-card">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#ef4444;opacity:0.5"></span>
+            <div>
+              <span class="eco-name">Security</span>
+              <span class="eco-desc">CVEs &amp; SSL certificate audit</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9093</span>
+            <span class="eco-badge badge-soon">Soon</span>
+          </div>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#8b5cf6;opacity:0.5"></span>
+            <div>
+              <span class="eco-name">Notify</span>
+              <span class="eco-desc">Unified alerts &amp; routing</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9094</span>
+            <span class="eco-badge badge-soon">Soon</span>
+          </div>
+        </div>
+
+        <div class="eco-card">
+          <div class="eco-left">
+            <span class="eco-dot" style="--eco-color:#534AB7;opacity:0.5"></span>
+            <div>
+              <span class="eco-name">Hub</span>
+              <span class="eco-desc">SSO &amp; central control panel</span>
+            </div>
+          </div>
+          <div class="eco-right">
+            <span class="eco-port">:9095</span>
+            <span class="eco-badge badge-soon">Soon</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════= SECURITY ══════════════════════════════════ -->
+  <section class="security-section">
+    <div class="container">
+      <div class="security-grid">
+
+        <div class="security-left reveal">
+          <p class="section-label">Privacy &amp; Architecture</p>
+          <h2>Your data. Your server.<br/><span class="text-blue">Always.</span></h2>
+          <p class="sec-desc">Cloud monitoring services ping your endpoints from external servers — meaning your uptime data lives on someone else's infrastructure. Pulse runs entirely within your own network. <strong>Your monitoring data never leaves your server.</strong></p>
+          <div class="arch-diagram">
+            <div class="arch-box">
+              <span class="arch-label">Your Infrastructure</span>
+              <div class="arch-item">
+                <span class="arch-icon">🐳</span>
+                <span>Docker services</span>
+              </div>
+              <div class="arch-line"></div>
+              <div class="arch-item arch-item-agent">
+                <span class="arch-icon">⚡</span>
+                <span>Pulse monitor</span>
+              </div>
+            </div>
+            <div class="arch-arrow-col">
+              <span class="arch-arrow">→</span>
+              <span class="arch-arrow-label">local<br/>network</span>
+            </div>
+            <div class="arch-box arch-box-pulse">
+              <span class="arch-label">Your Browser</span>
+              <div class="arch-item arch-item-pulse">
+                <span class="arch-icon">◈</span>
+                <span>Pulse :9092</span>
+              </div>
+            </div>
+          </div>
+          <p class="arch-note">
+            <span class="text-blue">●</span> Data stays on your server. No external pings. No cloud.
+          </p>
+        </div>
+
+        <div class="security-right reveal" style="--delay:150ms">
+          <ul class="sec-list">
+            <li>
+              <span class="check-circle">✓</span>
+              <div>
+                <strong>No cloud dependency</strong>
+                <span>Pulse runs 100% on your own server. Your uptime data is never sent to any external service.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check-circle">✓</span>
+              <div>
+                <strong>Docker socket proxy</strong>
+                <span>Container monitoring uses a read-only socket proxy — the raw Docker socket is never exposed.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check-circle">✓</span>
+              <div>
+                <strong>JWT authentication</strong>
+                <span>All API calls require a signed JWT token. Multi-user with Admin/Viewer roles.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check-circle">✓</span>
+              <div>
+                <strong>No external database required</strong>
+                <span>Zero-config persistence. No PostgreSQL, no Redis — just <code>docker compose up</code>.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ CTA FINAL ══════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <h2 class="reveal">Start monitoring in minutes.</h2>
+      <p class="reveal" style="--delay:80ms">Self-hosted. No cloud. No limits. Your infrastructure, yours.</p>
+      <div class="cta-actions reveal" style="--delay:160ms">
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="btn-primary">→ Get started free</a>
+        <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener" class="btn-secondary">View on GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ FOOTER ════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="footer-logo" href="#">
+          <svg width="18" height="18" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+            <rect x="28" y="28" width="62" height="62" rx="10" fill="#3b82f6"/>
+            <rect x="110" y="28" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.55"/>
+            <rect x="28" y="110" width="62" height="62" rx="10" fill="#3b82f6" opacity="0.3"/>
+            <rect x="110" y="110" width="62" height="62" rx="10" fill="none" stroke="#3b82f6" stroke-width="6"/>
+            <text x="119" y="154" font-family="Arial" font-weight="900" font-size="52" fill="#3b82f6">P</text>
+          </svg>
+          <span>NEXUS Pulse</span>
+        </a>
+        <p class="footer-copy">© 2026 alvaro_lab · MIT License</p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="https://github.com/Alvarito1983/nexus-pulse" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://hub.docker.com/r/afraguas1983/nexus-pulse" target="_blank" rel="noopener">Docker Hub</a>
+          <a href="https://alvarito1983.github.io/nexus-web/" target="_blank" rel="noopener">NEXUS</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
